@@ -4,7 +4,7 @@ import NavBar from "../components/nav";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { BookOpen, FileEdit, FileCheck, HelpCircle, Sparkles } from "lucide-react"
+import { BookOpen, FileEdit, FileCheck, HelpCircle, Sparkles, CameraIcon } from "lucide-react"
 import Link from "next/link"
 
 export default function Home() {
@@ -58,6 +58,13 @@ export default function Home() {
                   title="Multiple Choice Quiz"
                   description="Generate and modify comprehensive lesson plans."
                   icon={<HelpCircle className="w-10 h-10 text-blue-500" />}
+                  type="quiz"
+                />
+
+                <FeatureCard
+                  title="Meetings"
+                  description="Create Google Meet links for meetings with students."
+                  icon={<CameraIcon className="w-10 h-10 text-blue-500" />}
                   type="quiz"
                 />
               </div>
