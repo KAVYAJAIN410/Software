@@ -34,7 +34,7 @@ export default function SignInBtn() {
             style={{ userSelect: "none" }}
             onClick={handleSignOut}
             disabled={isProcessing}
-            className={`flex items-center gap-2 ${isProcessing ? "cursor-not-allowed" : ""}`}
+            className={`text-white flex items-center gap-2 ${isProcessing ? "cursor-not-allowed" : ""}`}
           >
             {isProcessing ? (
               <svg className="animate-spin h-4 w-4 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -49,7 +49,7 @@ export default function SignInBtn() {
             style={{ userSelect: "none" }}
             onClick={handleSignIn}
             disabled={isProcessing}
-            className={`flex items-center gap-2 ${isProcessing ? "cursor-not-allowed" : ""}`}
+            className={`text-white flex items-center gap-2 ${isProcessing ? "cursor-not-allowed" : ""}`}
           >
             {isProcessing ? (
               <svg className="animate-spin h-4 w-4 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
