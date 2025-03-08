@@ -2,8 +2,12 @@
 
 import { useState } from "react"
 import { GoogleGenerativeAI } from "@google/generative-ai"
-import { ArrowLeft, Loader2 } from "lucide-react"
+import { ArrowLeft, Loader2, Download } from "lucide-react"
 import Link from "next/link"
+import QuizRenderer from "@/components/quiz-renderer"
+import LessonPlanRenderer from "@/components/lesson-plan-renderer"
+import WorksheetRenderer from "@/components/worksheet-renderer"
+import CourseRenderer from "@/components/course-renderer"
 
 // Type definitions for our page props and generation types
 interface GeneratePageProps {
@@ -17,7 +21,7 @@ const typeToPromptMap: Record<string, string> = {
   "lesson-plan": "Generate a comprehensive lesson plan for the course: ",
   worksheet: "Generate a worksheet on the topic: ",
   courses: "Generate a course outline for: ",
-  quiz: "Generate 10 multiple choice questions on: ",
+  quiz: "Generate a quiz with 10 multiple choice questions on the topic: . For each question, provide 4 options labeled A, B, C, and D, and indicate the correct answer. Format each question as 'Q1:', 'Q2:', etc.",
 }
 
 // Map of generation types to their labels
@@ -64,6 +68,31 @@ export default function GeneratePage({ params }: GeneratePageProps) {
       .split("-")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ")
+  }
+
+  const renderContent = () => {
+    if (!generatedContent) return null
+
+    switch (type) {
+      case "quiz":
+        return <QuizRenderer content={generatedContent} />
+      case "lesson-plan":
+        return <LessonPlanRenderer content={generatedContent} />
+      case "worksheet":
+        return <WorksheetRenderer content={generatedContent} />
+      case "courses":
+        return <CourseRenderer content={generatedContent} />
+      default:
+        return (
+          <div className="prose max-w-none">
+            {generatedContent.split("\n").map((line, index) => (
+              <p key={index} className={line.trim() === "" ? "my-4" : "my-2"}>
+                {line}
+              </p>
+            ))}
+          </div>
+        )
+    }
   }
 
   return (
@@ -120,18 +149,29 @@ export default function GeneratePage({ params }: GeneratePageProps) {
 
         {generatedContent && (
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-bold mb-4">Generated {formatType(type)}</h2>
-            <div className="prose max-w-none">
-              {generatedContent.split("\n").map((line, index) => (
-                <p key={index} className={line.trim() === "" ? "my-4" : "my-2"}>
-                  {line}
-                </p>
-              ))}
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold">Generated {formatType(type)}</h2>
+              <button
+                onClick={() => {
+                  const blob = new Blob([generatedContent], { type: "text/plain" })
+                  const url = URL.createObjectURL(blob)
+                  const a = document.createElement("a")
+                  a.href = url
+                  a.download = `${formatType(type)}_${input.replace(/\s+/g, "_")}.txt`
+                  document.body.appendChild(a)
+                  a.click()
+                  document.body.removeChild(a)
+                }}
+                className="inline-flex items-center px-3 py-1.5 text-sm border border-gray-300 rounded-md hover:bg-gray-50"
+              >
+                <Download className="w-4 h-4 mr-1" />
+                Download
+              </button>
             </div>
+            {renderContent()}
           </div>
         )}
       </div>
     </div>
   )
 }
-

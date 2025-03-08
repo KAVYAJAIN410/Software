@@ -1,15 +1,14 @@
 "use client";
-import NavBar from "../components/nav";
-import Course from "@/components/course";
-import Student from "@/components/student";
+import FileUpload from "../../components/fileUpload";
+import TeacherMaterials from "../../components/TeacherMaterial";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Home from "../components/home"
-export default function Page() {
-  const router = useRouter();
+
+export default function Courses() {
   const [user, setUser] = useState(null);
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     if (status === "authenticated" && session?.accessTokenBackend) {
@@ -38,19 +37,18 @@ export default function Page() {
     }
   };
 
-  
-  
+  if (status === "loading") return <p>Loading session...</p>;
+  if (status === "unauthenticated") {
+    router.push("/login");
+    return <p>Redirecting to login...</p>;
+  }
+
+  if (!user) return <p>Loading user data...</p>;
 
   return (
     <>
-  <NavBar />
-
-  {user ? (
-    user.isTeacher ? <Course /> : <Student />
-  ) : (
-    <Home></Home> // This can be replaced with a proper fallback UI
-  )}
-</>
-
+      {user?.isTeacher && <FileUpload />}
+      <TeacherMaterials />
+    </>
   );
 }

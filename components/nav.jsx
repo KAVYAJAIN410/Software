@@ -33,7 +33,7 @@ export default function NavBar(){
                             </div>
                           </div>
                           <div className="flex items-center">
-                            <span className="text-white mr-2">Hello, Pakhi</span>
+                            <span className="text-white mr-2">Hello, Kavya</span>
                             <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-900">
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                                 <path

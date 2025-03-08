@@ -73,7 +73,7 @@ return (
 <div className="bg-white rounded-lg shadow-md p-6 relative overflow-hidden">
 <div className="flex items-start mb-4">
 <div>
-<h3 className="text-xl font-bold mb-2">Course</h3>
+<h3 className="text-xl font-bold mb-2">Material</h3>
 <p className="text-gray-600">upload and view th ematerials</p>
 </div>
 </div>

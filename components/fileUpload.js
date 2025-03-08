@@ -46,7 +46,7 @@ export default function FileUpload() {
   };
 
   return (
-    <div className="p-4 border rounded">
+    <div className="p-4 ">
       <h2 className="text-xl font-bold">Upload Course Material</h2>
       <input type="text" placeholder="Title" value={title} onChange={handleTitleChange} className="mt-2 p-2 border rounded" />
       <input type="text" placeholder="Description" value={description} onChange={handleDescriptionChange} className="mt-2 p-2 border rounded" />

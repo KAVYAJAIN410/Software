@@ -20,53 +20,51 @@ export default function TeacherMaterials() {
     }
   }, [session]);
 
-  // ✅ Function to generate correct Cloudinary preview URL
+  // ✅ Generate Cloudinary preview URL
   const getPreviewUrl = (fileUrl) => {
     if (!fileUrl) return "";
     
     if (fileUrl.endsWith(".pdf")) {
-      // ✅ Cloudinary PDF Viewer
       return `https://res.cloudinary.com/dfrb2fapb/image/upload/fl_attachment/${fileUrl}`;
     } else {
-      // ✅ Cloudinary Image Transformation (Auto resize)
       return fileUrl.replace("/upload/", "/upload/w_800,h_600,c_fit/");
     }
   };
 
   return (
-    <div className="p-6 border rounded-lg shadow">
-      <h2 className="text-2xl font-bold mb-4">📚 Uploaded Materials</h2>
+    <div className="p-6 bg-white border border-gray-200 rounded-2xl shadow-xl max-w-4xl mx-auto mt-10">
+      <h2 className="text-3xl font-extrabold text-gray-900 mb-6 flex items-center gap-2">
+        Uploaded Materials
+      </h2>
 
       {materials.length === 0 ? (
-        <p className="text-gray-600">No materials uploaded yet.</p>
+        <p className="text-gray-500 text-lg text-center">No materials uploaded yet.</p>
       ) : (
-        <ul className="space-y-4">
+        <ul className="space-y-6">
           {materials.map((material) => (
-            <li key={material._id} className="p-4 border rounded-lg shadow-sm">
-              <h3 className="font-bold text-lg">{material.Title}</h3>
-              <p className="text-gray-600">{material.Description}</p>
+            <li key={material._id} className="p-5 border border-gray-300 rounded-xl bg-gray-50 shadow-md hover:shadow-lg transition">
+              <h3 className="text-xl font-bold text-gray-800">{material.Title}</h3>
+              <p className="text-gray-600 mt-2">{material.Description}</p>
 
               {material.fileUrl ? (
-                <div className="mt-3 flex space-x-4">
-                  {/* Preview Button */}
+                <div className="mt-4 flex space-x-4">
                   <button
                     onClick={() => setPreviewUrl(getPreviewUrl(material.fileUrl))}
-                    className="px-4 py-2 bg-gray-500 text-white rounded-lg shadow hover:bg-gray-600 transition"
+                    className="px-5 py-2.5 bg-gray-700 text-white rounded-lg shadow-md hover:bg-gray-800 transition"
                   >
                     👀 Preview
                   </button>
 
-                  {/* Download Button */}
                   <a
                     href={material.fileUrl}
                     download
-                    className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition"
+                    className="px-5 py-2.5 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition"
                   >
                     📥 Download
                   </a>
                 </div>
               ) : (
-                <p className="text-red-500 mt-2">File not available</p>
+                <p className="text-red-500 mt-3">File not available</p>
               )}
             </li>
           ))}
@@ -75,13 +73,13 @@ export default function TeacherMaterials() {
 
       {/* Preview Modal Overlay */}
       {previewUrl && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-3xl w-full relative">
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 transition-opacity animate-fadeIn">
+          <div className="bg-white p-6 rounded-xl shadow-xl max-w-3xl w-full relative">
             <button
               onClick={() => setPreviewUrl(null)}
-              className="absolute top-3 right-3 text-gray-600 hover:text-gray-900"
+              className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-2xl"
             >
-              ✖ Close
+              ✖
             </button>
 
             <div className="mt-4">
@@ -95,7 +93,7 @@ export default function TeacherMaterials() {
                 <img
                   src={previewUrl}
                   alt="Preview"
-                  className="w-full h-auto max-h-[500px] rounded-lg"
+                  className="w-full h-auto max-h-[500px] rounded-lg shadow-md"
                 />
               )}
             </div>
