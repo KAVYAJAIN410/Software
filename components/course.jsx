@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { BookOpen, FileEdit, FileCheck, HelpCircle, Sparkles, CameraIcon } from "lucide-react"
 export default function Course(){
+  return(
 <>
 <main className="min-h-screen bg-white">
 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -43,9 +44,8 @@ export default function Course(){
 </div>
 </main>
 </>
-
+  )
 }
-
 
 function FeatureCard({ title, description, icon, type }) {
 return (
