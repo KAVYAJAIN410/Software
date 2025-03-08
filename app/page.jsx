@@ -4,6 +4,8 @@ import NavBar from "../components/nav";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import FileUpload from "../components/fileUpload"
+import TeacherMaterials from "../components/TeacherMaterial"
 export default function Home() {
   // const router=useRouter();
   // const { data: session, status } = useSession();
@@ -33,6 +35,8 @@ export default function Home() {
   return (
     <>
       <NavBar />
+      <FileUpload></FileUpload>
+      <TeacherMaterials></TeacherMaterials>
     </>
   )
 }

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { type } = require("os");
 const { Schema, Types } = mongoose;
 
 const userSchema = new Schema(
@@ -20,13 +21,19 @@ const userSchema = new Schema(
       required: false,
     },
     gender: {
-        type: String,
-        required: false,
-      },
-   hasFilledDetails: {
-      type: Boolean,
-      default: false,
+      type: String,
+      required: false,
     },
+    CourseId: [
+      {
+        type: Types.ObjectId,
+        ref: "courses", 
+      },
+    ],
+    isTeacher:{
+      type:Boolean,
+      default:false
+    }
   },
   { collection: "Users" }
 );
