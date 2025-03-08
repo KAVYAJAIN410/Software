@@ -9,9 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google-apps/meet": "^0.4.0",
+    "@google-cloud/local-auth": "^2.1.0",
+    "@google/generative-ai": "^0.24.0",
     "cloudinary": "^2.5.1",
     "formidable": "^3.5.2",
     "google-auth-library": "^9.15.1",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.479.0",
+    "mongoose": "^8.12.1",
     "gridfs-stream": "^1.1.1",
     "multer": "^1.4.5-lts.1",
     "multer-gridfs-storage": "^5.0.2",
